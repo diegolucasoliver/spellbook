@@ -373,10 +373,10 @@ fun SpellItem(spell: SpellResponse, onClick: () -> Unit) {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = spell.resume,
+                    text = spell.school?.displayName ?: "",
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.Gray,
-                    maxLines = 2
+                    maxLines = 1
                 )
             }
 

@@ -20,7 +20,6 @@ object MockData {
             target = "alimento para 1 criatura",
             duration = "cena"
         ),
-        resume = "Purifica refeição, que também fornece bônus temporários.",
         baseDescription = "Você purifica e abençoa uma porção de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado próprio para consumo.",
         enhancements = listOf(
             EnhancementResponse(0, "Truque: o alimento é purificado."),

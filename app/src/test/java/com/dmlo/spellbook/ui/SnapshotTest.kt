@@ -1,7 +1,16 @@
 package com.dmlo.spellbook.ui
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.dp
+import com.github.takahirom.roborazzi.captureRoboGif
 import com.github.takahirom.roborazzi.captureRoboImage
 import com.dmlo.spellbook.ui.theme.SpellBookTheme
 import com.dmlo.spellbook.viewmodel.SortOrder
@@ -11,6 +20,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import java.io.File
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -19,6 +29,23 @@ class SnapshotTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @Test
+    fun loadingIndicatorGif() {
+        composeTestRule.setContent {
+            SpellBookTheme {
+                Box(modifier = Modifier.size(100.dp), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+        }
+        
+        // Captura a animação do loading
+        val file = File("src/test/snapshots/loading_animation.gif")
+        composeTestRule.onRoot().captureRoboGif(composeTestRule, file) {
+            composeTestRule.mainClock.advanceTimeBy(1000)
+        }
+    }
 
     @Test
     fun spellItemSnapshot() {

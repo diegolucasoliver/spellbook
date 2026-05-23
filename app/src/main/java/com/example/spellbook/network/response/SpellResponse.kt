@@ -33,7 +33,6 @@ data class SpellResponse(
     var type: SpellType? = null,
     var circle: Int = 0,
     var requirements: RequirementsResponse = RequirementsResponse(),
-    var resume: String = "",
 
     @get:PropertyName("base_description")
     @set:PropertyName("base_description")
