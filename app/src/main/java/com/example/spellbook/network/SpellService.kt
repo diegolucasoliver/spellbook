@@ -5,14 +5,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 
-class SpellService {
-    private val firestore = FirebaseFirestore.getInstance()
-    private val spellsCollection = firestore.collection("spells")
+interface ISpellService {
+    suspend fun getAllSpells(): List<SpellResponse>
+    suspend fun getSpellById(id: String): SpellResponse?
+}
+
+class SpellService : ISpellService {
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
+    private val spellsCollection by lazy { firestore.collection("spells") }
 
     /**
      * Busca todas as magias da coleção "spells" ordenadas pelo nome.
      */
-    suspend fun getAllSpells(): List<SpellResponse> {
+    override suspend fun getAllSpells(): List<SpellResponse> {
         return try {
             val snapshot = spellsCollection
                 .orderBy("name", Query.Direction.ASCENDING)
@@ -27,12 +32,11 @@ class SpellService {
     /**
      * Busca uma magia pelo campo "_id".
      */
-    suspend fun getSpellById(id: String): SpellResponse? {
+    override suspend fun getSpellById(id: String): SpellResponse? {
         return try {
             val snapshot = spellsCollection.whereEqualTo("_id", id).get().await()
             snapshot.toObjects(SpellResponse::class.java).firstOrNull()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (_: Exception) {
             null
         }
     }

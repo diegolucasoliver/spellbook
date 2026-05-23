@@ -2,6 +2,7 @@ package com.dmlo.spellbook.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dmlo.spellbook.network.ISpellService
 import com.dmlo.spellbook.network.SpellService
 import com.dmlo.spellbook.network.response.SpellResponse
 import com.dmlo.spellbook.network.response.SpellSchool
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.stateIn
 
 enum class SortOrder { NAME, CIRCLE }
 
-class SpellViewModel(private val spellService: SpellService = SpellService()) : ViewModel() {
+class SpellViewModel(private val spellService: ISpellService = SpellService()) : ViewModel() {
 
     private val _spells = MutableStateFlow<List<SpellResponse>>(emptyList())
     

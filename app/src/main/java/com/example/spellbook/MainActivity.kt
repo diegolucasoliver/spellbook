@@ -21,6 +21,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.dmlo.spellbook.network.ISpellService
+import com.dmlo.spellbook.network.response.SpellResponse
 import com.dmlo.spellbook.ui.SpellDetailScreen
 import com.dmlo.spellbook.ui.SpellListScreen
 import com.dmlo.spellbook.ui.theme.SpellBookTheme
@@ -106,8 +108,13 @@ fun SpellBookApp(viewModel: SpellViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun SpellBookAppPreview() {
+    val fakeService = object : ISpellService {
+        override suspend fun getAllSpells(): List<SpellResponse> = emptyList()
+        override suspend fun getSpellById(id: String): SpellResponse? = null
+    }
+    // Usamos remember para o Preview evitar recriações e silenciar o aviso de lint
+    val viewModel = remember { SpellViewModel(fakeService) }
     SpellBookTheme {
-        // ViewModel dummy para preview
-        SpellBookApp(viewModel = SpellViewModel())
+        SpellBookApp(viewModel = viewModel)
     }
 }
