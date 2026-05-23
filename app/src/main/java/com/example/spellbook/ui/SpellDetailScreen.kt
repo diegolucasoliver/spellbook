@@ -118,7 +118,7 @@ fun SpellDetailContent(
                     if (currentSpell.enhancements.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(16.dp))
                         SectionTitle("Aprimoramentos")
-                        currentSpell.enhancements.forEach { enhancement ->
+                        currentSpell.enhancements.forEachIndexed { index, enhancement ->
                             Column(modifier = Modifier.padding(vertical = 4.dp)) {
                                 Text(
                                     text = "+${enhancement.additionalPmCost} PM",
@@ -130,11 +130,13 @@ fun SpellDetailContent(
                                     text = enhancement.description,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                HorizontalDivider(
-                                    modifier = Modifier.padding(top = 8.dp),
-                                    thickness = 0.5.dp,
-                                    color = MaterialTheme.colorScheme.outlineVariant
-                                )
+                                if (index < currentSpell.enhancements.lastIndex) {
+                                    HorizontalDivider(
+                                        modifier = Modifier.padding(top = 8.dp),
+                                        thickness = 0.5.dp,
+                                        color = MaterialTheme.colorScheme.outlineVariant
+                                    )
+                                }
                             }
                         }
                     }
