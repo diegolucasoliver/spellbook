@@ -21,6 +21,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.compose.ui.res.stringResource
+import com.dmlo.spellbook.R
 import com.dmlo.spellbook.network.ISpellService
 import com.dmlo.spellbook.network.response.SpellResponse
 import com.dmlo.spellbook.ui.SpellDetailScreen
@@ -45,7 +47,8 @@ class MainActivity : ComponentActivity() {
                     // Logado com sucesso, agora podemos carregar os dados
                     viewModel.loadSpells()
                 } else {
-                    viewModel.setErrorMessage("Erro na autenticação: ${task.exception?.message}")
+                    val errorMessage = getString(R.string.error_auth, task.exception?.message ?: "")
+                    viewModel.setErrorMessage(errorMessage)
                 }
             }
 

@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.dmlo.spellbook.R
 import com.dmlo.spellbook.network.response.SpellResponse
 import com.dmlo.spellbook.viewmodel.SpellViewModel
 
@@ -65,10 +67,10 @@ fun SpellDetailContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("SpellBook") },
+                title = { Text(stringResource(R.string.app_name)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
@@ -98,18 +100,18 @@ fun SpellDetailContent(
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    SectionTitle("Requisitos")
-                    InfoRow("Execução", currentSpell.requirements.execution)
-                    InfoRow("Alcance", currentSpell.requirements.range)
-                    currentSpell.requirements.target?.let { InfoRow("Alvo", it) }
-                    currentSpell.requirements.area?.let { InfoRow("Área", it) }
-                    currentSpell.requirements.effect?.let { InfoRow("Efeito", it) }
-                    InfoRow("Duração", currentSpell.requirements.duration)
-                    currentSpell.requirements.resistance?.let { InfoRow("Resistência", it) }
+                    SectionTitle(stringResource(R.string.section_requirements))
+                    InfoRow(stringResource(R.string.label_execution), currentSpell.requirements.execution)
+                    InfoRow(stringResource(R.string.label_range), currentSpell.requirements.range)
+                    currentSpell.requirements.target?.let { InfoRow(stringResource(R.string.label_target), it) }
+                    currentSpell.requirements.area?.let { InfoRow(stringResource(R.string.label_area), it) }
+                    currentSpell.requirements.effect?.let { InfoRow(stringResource(R.string.label_effect), it) }
+                    InfoRow(stringResource(R.string.label_duration), currentSpell.requirements.duration)
+                    currentSpell.requirements.resistance?.let { InfoRow(stringResource(R.string.label_resistance), it) }
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    SectionTitle("Descrição")
+                    SectionTitle(stringResource(R.string.section_description))
                     Text(
                         text = currentSpell.baseDescription,
                         style = MaterialTheme.typography.bodyMedium
@@ -117,7 +119,7 @@ fun SpellDetailContent(
                     
                     if (currentSpell.enhancements.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(16.dp))
-                        SectionTitle("Aprimoramentos")
+                        SectionTitle(stringResource(R.string.section_enhancements))
                         currentSpell.enhancements.forEachIndexed { index, enhancement ->
                             Column(modifier = Modifier.padding(vertical = 4.dp)) {
                                 Text(
@@ -143,7 +145,7 @@ fun SpellDetailContent(
                 }
             } else {
                 Text(
-                    text = "Magia não encontrada.",
+                    text = stringResource(R.string.spell_not_found),
                     modifier = Modifier.align(Alignment.Center)
                 )
             }

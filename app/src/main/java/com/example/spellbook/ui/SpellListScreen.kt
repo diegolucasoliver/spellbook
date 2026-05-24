@@ -55,6 +55,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.dmlo.spellbook.R
 import com.dmlo.spellbook.network.response.SpellResponse
 import com.dmlo.spellbook.network.response.SpellSchool
 import com.dmlo.spellbook.network.response.SpellType
@@ -127,7 +129,7 @@ fun SpellListContent(
                         TextField(
                             value = searchQuery,
                             onValueChange = onSearchQueryChanged,
-                            placeholder = { Text("Pesquisar magia...") },
+                            placeholder = { Text(stringResource(R.string.search_placeholder)) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             colors = TextFieldDefaults.colors(
@@ -139,7 +141,7 @@ fun SpellListContent(
                             )
                         )
                     } else {
-                        Text("SpellBook")
+                        Text(stringResource(R.string.app_name))
                     }
                 },
                 actions = {
@@ -148,11 +150,11 @@ fun SpellListContent(
                             isSearchExpanded = false
                             onSearchQueryChanged("")
                         }) {
-                            Icon(Icons.Default.Close, contentDescription = "Fechar pesquisa")
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.close_search))
                         }
                     } else {
                         IconButton(onClick = { isSearchExpanded = true }) {
-                            Icon(Icons.Default.Search, contentDescription = "Pesquisar")
+                            Icon(Icons.Default.Search, contentDescription = stringResource(R.string.search_icon))
                         }
                     }
                 }
@@ -216,7 +218,7 @@ fun FilterSection(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             FilterDropdown(
-                label = "Tipo",
+                label = stringResource(R.string.filter_type),
                 options = SpellType.entries,
                 selectedOption = selectedType,
                 onOptionSelected = onTypeSelected,
@@ -225,7 +227,7 @@ fun FilterSection(
             )
 
             FilterDropdown(
-                label = "Círculo",
+                label = stringResource(R.string.filter_circle),
                 options = (1..5).toList(),
                 selectedOption = selectedCircle,
                 onOptionSelected = { onCircleSelected(it) },
@@ -234,7 +236,7 @@ fun FilterSection(
             )
 
             FilterDropdown(
-                label = "Escola",
+                label = stringResource(R.string.filter_school),
                 options = SpellSchool.entries,
                 selectedOption = selectedSchool,
                 onOptionSelected = onSchoolSelected,
@@ -251,7 +253,7 @@ fun FilterSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Ordenar por:",
+                text = stringResource(R.string.sort_by),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -262,7 +264,7 @@ fun FilterSection(
                 }
             ) {
                 Text(
-                    text = if (currentSortOrder == SortOrder.NAME) "Nome" else "Círculo",
+                    text = if (currentSortOrder == SortOrder.NAME) stringResource(R.string.sort_name) else stringResource(R.string.sort_circle),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
@@ -288,7 +290,7 @@ fun <T> FilterDropdown(
         onExpandedChange = { expanded = !expanded },
         modifier = modifier
     ) {
-        val value = selectedOption?.let { getDisplayName(it) } ?: "Todos"
+        val value = selectedOption?.let { getDisplayName(it) } ?: stringResource(R.string.filter_all)
         
         BasicTextField(
             value = value,
@@ -332,7 +334,7 @@ fun <T> FilterDropdown(
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
-                text = { Text("Todos") },
+                text = { Text(stringResource(R.string.filter_all)) },
                 onClick = {
                     onOptionSelected(null)
                     expanded = false

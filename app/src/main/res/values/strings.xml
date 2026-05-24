@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">SpellBook</string>
+
+    <!-- Navigation -->
+    <string name="back">Voltar</string>
+    <string name="route_list">list</string>
+    <string name="route_detail">detail/{spellId}</string>
+
+    <!-- Errors -->
+    <string name="error_auth">Erro na autenticação: %s</string>
+    <string name="spell_not_found">Magia não encontrada.</string>
+    <string name="section_requirements">Requisitos</string>
+    <string name="section_description">Descrição</string>
+    <string name="section_enhancements">Aprimoramentos</string>
+
+    <!-- Requirements Labels -->
+    <string name="label_execution">Execução</string>
+    <string name="label_range">Alcance</string>
+    <string name="label_target">Alvo</string>
+    <string name="label_area">Área</string>
+    <string name="label_effect">Efeito</string>
+    <string name="label_duration">Duração</string>
+    <string name="label_resistance">Resistência</string>
+
+    <!-- Spell List -->
+    <string name="search_placeholder">Pesquisar magia&#8230;</string>
+    <string name="close_search">Fechar pesquisa</string>
+    <string name="search_icon">Pesquisar</string>
+    <string name="filter_type">Tipo</string>
+    <string name="filter_circle">Círculo</string>
+    <string name="filter_school">Escola</string>
+    <string name="filter_all">Todos</string>
+    <string name="sort_by">Ordenar por:</string>
+    <string name="sort_name">Nome</string>
+    <string name="sort_circle">Círculo</string>
 </resources>
