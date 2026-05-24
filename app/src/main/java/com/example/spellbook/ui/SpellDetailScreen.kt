@@ -25,7 +25,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import com.dmlo.spellbook.R
@@ -123,13 +126,17 @@ fun SpellDetailContent(
                         currentSpell.enhancements.forEachIndexed { index, enhancement ->
                             Column(modifier = Modifier.padding(vertical = 4.dp)) {
                                 Text(
-                                    text = enhancement.additionalPmCost,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.secondary
-                                )
-                                Text(
-                                    text = enhancement.description,
+                                    text = buildAnnotatedString {
+                                        withStyle(
+                                            style = SpanStyle(
+                                                fontWeight = FontWeight.Bold,
+                                                color = MaterialTheme.colorScheme.secondary
+                                            )
+                                        ) {
+                                            append("${enhancement.additionalPmCost}: ")
+                                        }
+                                        append(enhancement.description)
+                                    },
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 if (index < currentSpell.enhancements.lastIndex) {
