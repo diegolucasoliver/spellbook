@@ -54,7 +54,7 @@ data class RequirementsResponse(
 data class EnhancementResponse(
     @get:PropertyName("additional_pm_cost")
     @set:PropertyName("additional_pm_cost")
-    var additionalPmCost: Int = 0,
+    var additionalPmCost: String = "",
 
     var description: String = ""
 )

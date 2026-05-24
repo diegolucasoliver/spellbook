@@ -121,7 +121,7 @@ fun SpellDetailContent(
                         currentSpell.enhancements.forEachIndexed { index, enhancement ->
                             Column(modifier = Modifier.padding(vertical = 4.dp)) {
                                 Text(
-                                    text = "+${enhancement.additionalPmCost} PM",
+                                    text = enhancement.additionalPmCost,
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.secondary
